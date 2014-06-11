@@ -17,7 +17,7 @@
     	$queryMarcador = "SELECT titulo AS marcador FROM marcadores
     					WHERE creador=? AND id_marcador=? LIMIT 1";
 
-	    $queryExamen = "SELECT examenes.id_examen, examenes.nombre, examenes.descripcion
+	    $queryExamen = "SELECT examenes.id_examen, examenes.nombre, examenes.abierto, examenes.descripcion
 	    				FROM examenes
 	    				INNER JOIN marcadores ON marcadores.id_marcador=examenes.marcador
 	    				WHERE examenes.marcador=? AND marcadores.creador=? LIMIT 1";
@@ -54,7 +54,7 @@
 
 		    // ejecuto el  query
 		    $stmt->execute();
-		    $stmt->bind_result($res_id_examen, $res_nombre, $res_descripcion);
+		    $stmt->bind_result($res_id_examen, $res_nombre, $res_abierto, $res_descripcion);
 			$stmt->fetch();
 			// Variable locales
 			$examen['id_examen'] = $res_id_examen;
@@ -64,6 +64,7 @@
 			// variable de retorno
 			$json['id'] = $res_id_examen;
 			$json['marcador'] = $res_marcador;
+			$json['abierto'] = $res_abierto;
 			$json['info']['name'] = $res_nombre;
 			$json['info']['main'] = $res_descripcion;
 			$json['info']['results'] = "";

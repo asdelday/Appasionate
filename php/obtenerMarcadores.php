@@ -81,7 +81,7 @@
 
 		for ($i = 0; $i < sizeof($json); $i++) {
 
-			if ($result = $mysqli->query("SELECT path_imagen FROM imagenes WHERE marcador=".$json[$i]['id_marcador'])) {
+			if ($result = $mysqli->query("SELECT id_imagen, path_imagen FROM imagenes WHERE marcador=".$json[$i]['id_marcador'])) {
 
 			    $data = array();
 			    while($row = $result->fetch_assoc()){

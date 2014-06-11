@@ -14,7 +14,7 @@
     	$json['questions'] = array();
 
     	// QUERIES
-	    $queryExamen = "SELECT id_examen, nombre, descripcion FROM examenes WHERE marcador=? LIMIT 1";
+	    $queryExamen = "SELECT id_examen, nombre, descripcion, abierto FROM examenes WHERE marcador=? LIMIT 1";
 
 	    $queryPreguntas = "SELECT id_pregunta, pregunta, mensaje_correcto, mensaje_error
 	    					FROM preguntas WHERE examen=?";
@@ -30,7 +30,7 @@
 
 	    // ejecuto el  query
 	    $stmt->execute();
-	    $stmt->bind_result($res_id_examen, $res_nombre, $res_descripcion);
+	    $stmt->bind_result($res_id_examen, $res_nombre, $res_descripcion, $res_abierto);
 		$stmt->fetch();
 		// Variable locales
 		$examen['id_examen'] = $res_id_examen;
@@ -39,6 +39,7 @@
 		$examen['preguntas'] = array();
 		// variable de retorno
 		$json['id'] = $res_id_examen;
+		$json['abierto'] = $res_abierto;
 		$json['info']['name'] = $res_nombre;
 		$json['info']['main'] = $res_descripcion;
 		$json['info']['results'] = "";
